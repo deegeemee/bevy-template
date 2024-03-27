@@ -22,7 +22,7 @@ The repository is meant to be a template for future Bevy projects.
 To install run the following commands in terminal:
 
 ```
-git clone https://github.com/synec/bevy-playground.git
+git clone https://github.com/deegeemee/bevy-template
 cd bevy-playground
 cargo run
 ```
