@@ -1,15 +1,14 @@
 use bevy::prelude::*;
 
-pub fn setup(
-    mut commands: Commands,
-) {
-    commands.spawn(PointLightBundle {
-        point_light: PointLight {
-            intensity: 1500.0,
+pub fn setup(mut commands: Commands) {
+    commands.spawn((
+        PointLight {
+            intensity: 1_000_000.0,
+            radius: 0.0,
+            color: Color::WHITE,
             shadows_enabled: true,
             ..default()
         },
-        transform: Transform::from_xyz(4.0, 8.0, 4.0),
-        ..default()
-    });
+        Transform::from_xyz(2.5, 8.0, 2.5),
+    ));
 }

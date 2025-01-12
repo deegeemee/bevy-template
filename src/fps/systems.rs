@@ -7,31 +7,32 @@ use super::components::*;
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands
-        .spawn(
-            TextBundle::from_sections([TextSection::new(
-                "\nfps: ",
-                TextStyle {
-                    font: asset_server.load("fonts/roboto_mono_for_powerline.ttf"),
-                    font_size: 20.0,
-                    color: Color::rgb(1.0, 1.0, 1.0),
-                },
-            )])
-            .with_style(Style {
+        .spawn((
+            Text::new(String::from("")),
+            TextFont {
+                font: asset_server.load("fonts/roboto_mono_for_powerline.ttf"),
+                font_size: 16.0,
+                ..default()
+            },
+            Node {
                 position_type: PositionType::Absolute,
                 top: Val::Px(5.0),
                 left: Val::Px(5.0),
-                ..Default::default()
-            }),
-        )
+                ..default()
+            },
+        ))
         .insert(StatsText);
 }
 
-pub fn system(diagnostics: Res<DiagnosticsStore>, mut query: Query<&mut Text, With<StatsText>>) {
-    let mut text = query.single_mut();
-
+pub fn system(
+    diagnostics: Res<DiagnosticsStore>,
+    query: Query<Entity, With<StatsText>>,
+    mut writer: TextUiWriter,
+) {
+    let entity = query.single();
     if let Some(fps) = diagnostics.get(&FrameTimeDiagnosticsPlugin::FPS) {
         if let Some(average) = fps.average() {
-            text.sections[0].value = format!("{average:.2} fps");
+            *writer.text(entity, 0) = format!("{average:.2} fps");
         }
     };
 }

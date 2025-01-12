@@ -5,12 +5,11 @@ pub fn setup(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-    commands.spawn(PbrBundle {
-        mesh: meshes.add(Plane3d::default().mesh().size(10.0, 10.0)),
-        material: materials.add(StandardMaterial {
-            base_color: Color::hex("#ffd891").unwrap(),
+    commands.spawn((
+        Mesh3d(meshes.add(Plane3d::default().mesh().size(10.0, 10.0))),
+        MeshMaterial3d(materials.add(StandardMaterial {
+            base_color: Color::srgba(0.448, 0.71, 0.87, 1.0),
             ..default()
-        }),
-        ..default()
-    });
+        })),
+    ));
 }

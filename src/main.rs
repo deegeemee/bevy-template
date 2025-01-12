@@ -20,9 +20,9 @@ fn main() {
                 .set(AssetPlugin { ..default() })
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        title: "Bevy playground!".to_string(),
-                        resolution: WindowResolution::new(800., 800. / 16. * 10.),
                         position: WindowPosition::Centered(MonitorSelection::Current),
+                        title: "Bevy playground!".to_string(),
+                        resolution: WindowResolution::new(1280., 1280. / 16. * 10.),
                         present_mode: PresentMode::AutoVsync,
                         ..default()
                     }),
